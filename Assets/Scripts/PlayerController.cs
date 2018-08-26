@@ -11,24 +11,27 @@ public class PlayerController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        Vector3 travelVector = new Vector3();
         if (Input.GetKey("w"))
         {
-            agent.SetDestination(transform.position + new Vector3(0,0,1));
+            travelVector.z = 1;
         }
 		
         if (Input.GetKey("a"))
         {
-            agent.SetDestination(transform.position + new Vector3(-1,0,0));
+            travelVector.x = -1;
         }
 
         if (Input.GetKey("s"))
         {
-            agent.SetDestination(transform.position + new Vector3(0,0,-1));
+            travelVector.z = -1;
         }
 
         if (Input.GetKey("d"))
         {
-            agent.SetDestination(transform.position + new Vector3(1,0,0));
+            travelVector.x = 1;
         }
-	}
+        agent.SetDestination(transform.position + travelVector);
+        this.GetComponent<Shooter>().fire = Input.GetKey("space");
+    }
 }
